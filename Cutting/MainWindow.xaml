@@ -1,0 +1,19 @@
+﻿<Window x:Class="Cutting.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cutting"
+        mc:Ignorable="d"
+        Title="Cutting" Height="177" Width="370" ResizeMode="NoResize">
+    <Grid HorizontalAlignment="Center" Width="350" Margin="0,0,0,10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Нарезать" HorizontalAlignment="Left" Height="48" Margin="201,19,0,0" VerticalAlignment="Top" Width="136" Click="ButtonCut"/>
+        <Button Content="Выбрать" HorizontalAlignment="Left" Height="48" Margin="15,19,0,0" VerticalAlignment="Top" Width="138" Click="ButtonOpen"/>
+        <TextBox HorizontalAlignment="Center" Margin="0,108,0,0" TextWrapping="Wrap" Text="13 18 22 30" VerticalAlignment="Top" Width="330" TextChanged="TextBox_TextChanged" Name="TextBox1"/>
+        <TextBlock Margin="10,87,90,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="16"><Run Text="Введите временные отрезки (через пробел):"/><LineBreak/><Run/></TextBlock>
+
+    </Grid>
+</Window>
