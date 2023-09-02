@@ -1,16 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using MediaToolkit;
 using MediaToolkit.Model;
 using MediaToolkit.Options;
@@ -18,7 +9,7 @@ using MediaToolkit.Options;
 namespace Cutting
 {
     /// <summary>
-    /// Логика взаимодействия для Window1.xaml
+    /// Window wait for execution
     /// </summary>
     public partial class WindowBar : Window
     {
@@ -27,6 +18,11 @@ namespace Cutting
         private readonly string outputFile;
         private bool cancel = false;
 
+        /// <summary>
+        /// Start window for cut video
+        /// </summary>
+        /// <param name="timimings">video cutting time</param>
+        /// <param name="inputFile">path to file</param>
         public WindowBar(List<int> timimings, string inputFile)
         {
             InitializeComponent();
@@ -38,6 +34,9 @@ namespace Cutting
             Cut();
         }
 
+        /// <summary>
+        /// Function for cutting
+        /// </summary>
         private async void Cut()
         {
             using (var engine = new Engine())
@@ -62,9 +61,13 @@ namespace Cutting
             Close();
         }
 
+        /// <summary>
+        /// Button for cancel
+        /// </summary>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             cancel = true;
+            TextBar.Text = "Завершение";
         }
     }
 }

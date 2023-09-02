@@ -5,15 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cutting"
         mc:Ignorable="d"
-        Title="Cutting" Height="177" Width="370" ResizeMode="NoResize">
+        Title="Cutting" Height="200" Width="370" ResizeMode="NoResize">
     <Grid HorizontalAlignment="Center" Width="350" Margin="0,0,0,10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button Content="Нарезать" HorizontalAlignment="Left" Height="48" Margin="201,19,0,0" VerticalAlignment="Top" Width="136" Click="ButtonCut"/>
-        <Button Content="Выбрать" HorizontalAlignment="Left" Height="48" Margin="15,19,0,0" VerticalAlignment="Top" Width="138" Click="ButtonOpen"/>
-        <TextBox HorizontalAlignment="Center" Margin="0,108,0,0" TextWrapping="Wrap" Text="13 18 22 30" VerticalAlignment="Top" Width="330" TextChanged="TextBox_TextChanged" Name="TextBox1"/>
-        <TextBlock Margin="10,87,90,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="16"><Run Text="Введите временные отрезки (через пробел):"/><LineBreak/><Run/></TextBlock>
+        <Button Content="Нарезать" HorizontalAlignment="Left" Height="48" Margin="201,38,0,0" VerticalAlignment="Top" Width="136" Click="ButtonCut"/>
+        <Button Content="Выбрать&#xD;&#xA;(или перетащите)" HorizontalAlignment="Left" Height="48" Margin="15,38,0,0" VerticalAlignment="Top" Width="138" Click="ButtonOpen" DragDrop.Drop="InsertInButton" AllowDrop="True" TextBlock.TextAlignment="Center"/>
+        <TextBox HorizontalAlignment="Center" Margin="0,127,0,0" TextWrapping="Wrap" Text="13 18 22 30" VerticalAlignment="Top" Width="330" TextChanged="TextBox_TextChanged" Name="TextBox1"/>
+        <TextBlock Margin="10,106,90,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="16"><Run Text="Введите временные отрезки (через пробел):"/><LineBreak/><Run/></TextBlock>
+        <TextBlock HorizontalAlignment="Center" Height="23" Margin="0,10,0,0" TextWrapping="Wrap" Text="Файл не выбран" VerticalAlignment="Top" Width="330" Name="FileName"/>
 
     </Grid>
 </Window>
