@@ -15,7 +15,7 @@ namespace Cutting
     {
         private readonly List<int> timimings = new();
         private readonly MediaFile inputFile = new();
-        private readonly string outputFile;
+        private readonly string pathOutFile;
         private bool cancel = false;
 
         /// <summary>
@@ -29,9 +29,24 @@ namespace Cutting
 
             this.timimings = timimings;
             this.inputFile.Filename = inputFile;
-            outputFile = inputFile.Substring(0, inputFile.LastIndexOf(@"\") + 2);
+            pathOutFile = inputFile.Substring(0, inputFile.LastIndexOf(@"\") + 1);
 
             Cut();
+        }
+
+        private string? CreateNameOutFile(int iTimings)
+        {
+            string pathInput = inputFile.Filename;
+            int lastUderLining = pathInput.LastIndexOf('_');
+            if (lastUderLining == -1)
+                return null;
+            string fSegmentPath = pathInput.Substring(pathOutFile.Length, lastUderLining - pathOutFile.Length);
+            int sUnderLining = fSegmentPath.LastIndexOf('_');
+            if (sUnderLining == -1)
+                return null;
+            fSegmentPath = pathInput.Substring(0, sUnderLining + 1);
+            string sSegmentPath = pathInput.Substring(lastUderLining - 1, pathInput.Length - lastUderLining + 1);
+            return $"{fSegmentPath}{timimings[iTimings]}{sSegmentPath}";
         }
 
         /// <summary>
@@ -48,11 +63,15 @@ namespace Cutting
                 for (int i = 0; i < timimings.Count; i++)
                 {
                     if (cancel)
+                    {
                         Close();
+                        return;
+                    }
 
                     options.CutMedia(TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(timimings[i]));
 
-                    var nameOutFile = new MediaFile { Filename = outputFile + $@"short_{timimings[i]}.mp4" };
+                    MediaFile nameOutFile = new MediaFile { Filename = pathOutFile + (CreateNameOutFile(i) ?? $"short_{timimings[i]}s.mp4") };
+
                     await Task.Run(() => engine.Convert(inputFile, nameOutFile, options));
 
                     TextBar.Text = $"Создано {i + 1} из {timimings.Count}";
